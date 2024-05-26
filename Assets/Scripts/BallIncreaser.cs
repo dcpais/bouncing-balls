@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class BallMovement : MonoBehaviour
+public class BallIncreaser : MonoBehaviour
 {
     
     [SerializeField]
@@ -41,7 +41,7 @@ public class BallMovement : MonoBehaviour
 
         // IMPORTANT!
         // Timescale adjust
-        Time.timeScale = 0.3f;
+        Time.timeScale = 1.5f;
 
         // Setup the edge collider
         _collider.radius = _radius;
@@ -60,6 +60,7 @@ public class BallMovement : MonoBehaviour
     }
 
     private void DrawCircle() {
+        _collider.radius = _radius;
         _vertices = GenerateCirclePoints(_radius, _splits);
         _triangles = GenerateCircleTriangles(_vertices);
         _mesh.Clear();
@@ -115,13 +116,7 @@ public class BallMovement : MonoBehaviour
             Random.Range(0.0f, 1.0f)
         );
 
-        if (Random.Range(0.0f, 1.0f) < 0.25 && _canSpawn) {
-            Instantiate(this, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-        } else if (!_canSpawn) {
-            if (Time.time - _sinceSpawn > 2.0) {
-                _canSpawn = true;
-            }
-        }
-
+        _radius *= 1.01f;
+        DrawCircle();
     }
 }

@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 54556282}
-  - component: {fileID: 54556281}
+  - component: {fileID: 54556287}
   - component: {fileID: 54556286}
   - component: {fileID: 54556285}
   - component: {fileID: 54556284}
@@ -144,26 +144,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &54556281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54556280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63e71899da223b4a811ec1d64aac421, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _self: {fileID: 54556280}
-  _collider: {fileID: 54556283}
-  _rigidbody: {fileID: 54556284}
-  _meshFilter: {fileID: 54556285}
-  _radius: 0.25
-  _splits: 30
-  _vertices: []
-  _triangles: 
 --- !u!4 &54556282
 Transform:
   m_ObjectHideFlags: 0
@@ -291,6 +271,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &54556287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54556280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b70fa2ac425234d99d84fa68887dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _self: {fileID: 54556280}
+  _collider: {fileID: 54556283}
+  _rigidbody: {fileID: 54556284}
+  _meshFilter: {fileID: 54556285}
+  _radius: 0.25
+  _splits: 30
+  _vertices: []
+  _triangles: 
 --- !u!1 &919951472
 GameObject:
   m_ObjectHideFlags: 0
