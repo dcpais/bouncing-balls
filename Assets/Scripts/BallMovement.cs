@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -20,10 +22,6 @@ public class BallMovement : MonoBehaviour
     [SerializeField]
     private MeshFilter _meshFilter;
     [SerializeField]
-    private double _speed;
-    [SerializeField]
-    private Vector2 _direction;
-    [SerializeField]
     private float _radius;
     [SerializeField]
     private int _splits;
@@ -31,6 +29,8 @@ public class BallMovement : MonoBehaviour
     private Mesh _mesh;
     public Vector3[] _vertices;
     public int[] _triangles;
+    private bool _canSpawn;
+    private float _sinceSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -41,16 +41,22 @@ public class BallMovement : MonoBehaviour
 
         // IMPORTANT!
         // Timescale adjust
-        Time.timeScale = 1.5f;
+        Time.timeScale = 0.3f;
 
         // Setup the edge collider
         _collider.radius = _radius;
+        _canSpawn = false;
+        _sinceSpawn = Time.time;
 
         // Setup the mesh and render
         _mesh = new Mesh();
         _meshFilter.mesh = _mesh; // Set to our custom mesh
 
         DrawCircle();
+
+        // Initial push
+        // _rigidbody.AddForce(new Vector2(Random.Range(-2f, 2f), Random.Range(-1f, 2f)));
+        _rigidbody.AddForce(new Vector2(5, 5));
     }
 
     private void DrawCircle() {
@@ -108,6 +114,14 @@ public class BallMovement : MonoBehaviour
             Random.Range(0.0f, 1.0f),
             Random.Range(0.0f, 1.0f)
         );
+
+        if (Random.Range(0.0f, 1.0f) < 0.25 && _canSpawn) {
+            Instantiate(this, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        } else if (!_canSpawn) {
+            if (Time.time - _sinceSpawn > 2.0) {
+                _canSpawn = true;
+            }
+        }
 
     }
 }
