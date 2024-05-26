@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.Sqlite;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class CircleCage : MonoBehaviour
@@ -21,10 +22,14 @@ public class CircleCage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!_self || !_collider || !_renderer) {
+            throw new MissingReferenceException();
+        }
 
-        List<Vector2> points = GetPoints(_radius, _splits);
-        _collider.SetPoints(points);
-        _renderer.SetPositions(points.ConvertAll(x => (Vector3) x).ToArray());
+        List<Vector2> points = GetPoints(_radius, _splits); // Generate points
+        _collider.SetPoints(points); // Give points to collider
+        _renderer.positionCount = _splits;
+        _renderer.SetPositions(points.ConvertAll(x => (Vector3) x).ToArray()); // Give points to renderer
 
     }
 
@@ -44,9 +49,4 @@ public class CircleCage : MonoBehaviour
         return points;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
