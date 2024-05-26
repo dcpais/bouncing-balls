@@ -92,13 +92,22 @@ public class BallMovement : MonoBehaviour
         return triangles.ToArray();
     }
 
-    void Update()
-    {
-
-    }
-
     void OnCollisionEnter2D(Collision2D other)
     {
-        return;
+        // Collisions
+        ContactPoint2D[] contacts = new ContactPoint2D[other.contactCount];
+        other.GetContacts(contacts);
+
+        // Get new 
+        Vector3 contact = contacts[0].point;
+        
+        // Change ball colour
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        renderer.material.color = new Color(
+            Random.Range(0.0f, 1.0f),
+            Random.Range(0.0f, 1.0f),
+            Random.Range(0.0f, 1.0f)
+        );
+
     }
 }
